@@ -6,11 +6,18 @@ This project is a simple, role-based user authentication system using React. It 
 
 ## Features
 
-- **Role-Based Access Control**: Each user role (Principal, Teacher, Student) has access to a unique dashboard.
-- **Teacher Registration Approval**: Teachers must register, and the Principal must approve their accounts.
-- **Global State Management**: State is managed with `useReducer` and `useContext`, handling roles and actions across the app.
-- **Conditional Navigation**: Redirects users to different dashboards based on their role.
-- **Form Validation**: Includes basic validation, such as checking for password match during registration.
+- **Role-Based Access Control**: Each user role (Principal, Teacher, Student) has access to a unique dashboard, ensuring secure and role-specific views.
+
+- **Teacher Registration Approval**: Teachers register and require approval from the Principal, enhancing control over user access.
+
+- **Global State Management**: State is managed using `useReducer` and `useContext` to handle roles and actions consistently across the application.
+
+- **Conditional Navigation**: Users are redirected to different dashboards based on their role, providing a tailored experience.
+
+- **Form Validation**: Includes validation checks, such as ensuring password match during registration for a smoother user experience.
+
+- **Data Persistence**: User data and credentials are stored in `localStorage`, allowing for persistent state across sessions.
+
 
 ## How to Use
 
