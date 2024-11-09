@@ -1,0 +1,56 @@
+export const styles = {
+    container: {
+        fontFamily: 'Arial, sans-serif',
+        maxWidth: '400px',
+        margin: '50px auto',
+        padding: '20px',
+        backgroundColor: '#f4f4f4',
+        borderRadius: '8px',
+        boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+    },
+    heading: {
+        textAlign: 'center',
+        fontSize: '2rem',
+        color: '#333',
+        marginBottom: '20px',
+    },
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '15px',
+    },
+    input: {
+        padding: '10px',
+        fontSize: '1rem',
+        borderRadius: '4px',
+        border: '1px solid #ccc',
+        outline: 'none',
+        marginBottom: '10px',
+        transition: 'border 0.3s',
+    },
+    inputFocus: {
+        border: '1px solid #007BFF',
+    },
+    button: {
+        padding: '12px',
+        backgroundColor: '#007BFF',
+        color: 'white',
+        fontSize: '1rem',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        transition: 'background-color 0.3s',
+    },
+    buttonHover: {
+        backgroundColor: '#0056b3',
+    },
+    toggleButton: {
+        border: 'none',
+        background: 'none',
+        color: '#007BFF',
+        cursor: 'pointer',
+        textDecoration: 'underline',
+        textAlign: 'center',
+        marginTop: '15px',
+    },
+};

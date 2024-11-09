@@ -1,9 +1,8 @@
-import React, { useState, useReducer } from 'react';
-import { userReducer, getInitialState } from '../reducer/userReducer';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { styles } from '../styles/login';
 
-function Login() {
-    const [state, dispatch] = useReducer(userReducer, getInitialState());
+function Login({ state, dispatch }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [reEnteredPassword, setReEnteredPassword] = useState('');
@@ -17,7 +16,6 @@ function Login() {
             return;
         }
         if (isLogin) {
-            // check for if user is present/registered
             const user =
                 state.principal.userName === username && state.principal.password === password
                     ? state.principal
@@ -50,22 +48,22 @@ function Login() {
                     role: 'teacher'
                 }
             })
-            alert('Registered successfully! Principal need to approve your profile')
+            alert('Registered successfully! Principal needs to approve your profile')
             window.location.reload();
         }
-
     };
 
     return (
-        <div>
-            <h2>{isLogin ? 'Login' : 'Register'}</h2>
-            <form onSubmit={handleLogin}>
+        <div style={styles.container}>
+            <h2 style={styles.heading}>{isLogin ? 'Login' : 'Register'}</h2>
+            <form onSubmit={handleLogin} style={styles.form}>
                 <input
                     type="text"
                     placeholder="Enter Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
+                    style={styles.input}
                 />
                 <input
                     type="password"
@@ -73,6 +71,7 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    style={styles.input}
                 />
                 {
                     !isLogin && (
@@ -82,12 +81,13 @@ function Login() {
                             value={reEnteredPassword}
                             onChange={(e) => setReEnteredPassword(e.target.value)}
                             required
+                            style={styles.input}
                         />
                     )
                 }
-                <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
+                <button type="submit" style={styles.button}>{isLogin ? 'Login' : 'Register'}</button>
             </form>
-            <button onClick={() => setIsLogin(!isLogin)} style={{ border: 'none', background: 'none', color: 'blue', cursor: 'pointer', textDecoration: 'underline', marginTop: '10px' }}>
+            <button onClick={() => setIsLogin(!isLogin)} style={styles.toggleButton}>
                 {isLogin ? 'Register' : 'Back to Login'}
             </button>
         </div>

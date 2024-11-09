@@ -59,6 +59,7 @@ const userReducer = (state = getInitialState(), action) => {
                 ...state,
                 currentUser: {}
             }
+            console.log(38393, updatedState)
             saveToLocalStorage(updatedState);
             return updatedState;
         }

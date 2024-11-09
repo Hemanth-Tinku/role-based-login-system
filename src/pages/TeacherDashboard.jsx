@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useReducer } from 'react';
-import { userReducer, getInitialState } from '../reducer/userReducer';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
+import { styles } from '../styles/teacherDashboard';
+import { useNavigate } from 'react-router-dom';
 
-function TeacherDashboard() {
-    const [state, dispatch] = useReducer(userReducer, getInitialState());
+function TeacherDashboard({ state, dispatch }) {
+    const navigate = useNavigate();
     const currentTeacher = state.currentUser;
 
     const [studentUsername, setStudentUsername] = useState('');
@@ -31,58 +31,76 @@ function TeacherDashboard() {
         setStudentPassword('');
     };
 
+    // fallback to login page, if not teacher
+    useEffect(() => {
+        if (currentTeacher?.role !== 'teacher') {
+            if (currentTeacher?.role === 'principal') {
+                navigate('/principal-dashboard');
+            }
+            else if (currentTeacher?.role === 'student') {
+                navigate('/student-dashboard');
+            }
+        }
+    }, [currentTeacher])
+
     return (
-        <div>
-            <Navbar />
-            <h2>Teacher Dashboard</h2>
-            <h3>Profile</h3>
-            <p>Username: {currentTeacher.userName}</p>
-            <p>Status: {currentTeacher?.approved ? 'Approved' : 'Pending'}</p>
+        <div style={styles.container}>
+            <Navbar state={state} dispatch={dispatch} />
+            <div style={styles.content}>
+                <h2 style={styles.heading}>Teacher Dashboard</h2>
+                <p style={styles.text}>Username: {currentTeacher.userName}</p>
+                <p style={styles.text}>
+                    Status: {currentTeacher?.approved ? 'Approved' : 'Pending'}
+                </p>
 
-            {currentTeacher?.approved ? (
-                <>
-                    <h3>Students</h3>
-                    <ul>
-                        {state.students.length === 0 ? (
-                            <p>No students assigned</p>
-                        ) : (
-                            state.students
-                                .filter((student) => student.teacher === currentTeacher.userName)
-                                .map((student) => (
-                                    <li key={student.userName}>
-                                        <p>{student.userName}</p>
-                                    </li>
-                                ))
-                        )}
-                    </ul>
+                {currentTeacher?.approved ? (
+                    <>
+                        <h3 style={styles.subheading}>Students</h3>
+                        <ul style={styles.studentList}>
+                            {state.students.length === 0 ? (
+                                <p style={styles.noStudents}>No students assigned</p>
+                            ) : (
+                                state.students
+                                    .filter((student) => student.teacher === currentTeacher.userName)
+                                    .map((student) => (
+                                        <li key={student.userName} style={styles.studentItem}>
+                                            <p style={styles.studentInfo}>{student.userName}</p>
+                                        </li>
+                                    ))
+                            )}
+                        </ul>
 
-                    <h3>Add New Student</h3>
-                    <form onSubmit={handleAddStudent}>
-                        <div>
-                            <label>Student Username:</label>
-                            <input
-                                type="text"
-                                value={studentUsername}
-                                onChange={(e) => setStudentUsername(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Student Password:</label>
-                            <input
-                                type="password"
-                                value={studentPassword}
-                                onChange={(e) => setStudentPassword(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <button type="submit">Add Student</button>
-                    </form>
-                </>
-            ) : (
-                <p>Your Profile should be approved by principal</p>
-            )}
-
+                        <h3 style={styles.subheading}>Add New Student</h3>
+                        <form onSubmit={handleAddStudent} style={styles.form}>
+                            <div style={styles.formGroup}>
+                                <label style={styles.label}>Student Username:</label>
+                                <input
+                                    type="text"
+                                    value={studentUsername}
+                                    onChange={(e) => setStudentUsername(e.target.value)}
+                                    required
+                                    style={styles.input}
+                                />
+                            </div>
+                            <div style={styles.formGroup}>
+                                <label style={styles.label}>Student Password:</label>
+                                <input
+                                    type="password"
+                                    value={studentPassword}
+                                    onChange={(e) => setStudentPassword(e.target.value)}
+                                    required
+                                    style={styles.input}
+                                />
+                            </div>
+                            <button type="submit" style={styles.submitButton}>
+                                Add Student
+                            </button>
+                        </form>
+                    </>
+                ) : (
+                    <p style={styles.noApprovalText}>Your Profile should be approved by principal</p>
+                )}
+            </div>
         </div>
     );
 }

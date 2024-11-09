@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useReducer } from 'react';
-import { userReducer, getInitialState } from '../reducer/userReducer';
 
-const Navbar = () => {
-    const [state, dispatch] = useReducer(userReducer, getInitialState());
+const Navbar = ({ state, dispatch }) => {
     const navigate = useNavigate();
     const currentUser = state.currentUser;
 
