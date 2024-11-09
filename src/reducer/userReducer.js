@@ -54,6 +54,14 @@ const userReducer = (state = getInitialState(), action) => {
             saveToLocalStorage(updatedState);
             return updatedState;
         }
+        case 'LOGOUT_USER': {
+            const updatedState = {
+                ...state,
+                currentUser: {}
+            }
+            saveToLocalStorage(updatedState);
+            return updatedState;
+        }
 
         default: {
             return state;

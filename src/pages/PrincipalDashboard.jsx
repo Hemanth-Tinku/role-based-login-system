@@ -1,10 +1,9 @@
 import React, { useReducer } from 'react';
 import { userReducer, getInitialState } from '../reducer/userReducer';
-import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const PrincipalDashboard = () => {
     const [state, dispatch] = useReducer(userReducer, getInitialState());
-    const navigate = useNavigate();
 
     const approveTeacher = (teacherUserName) => {
         dispatch({
@@ -13,6 +12,7 @@ const PrincipalDashboard = () => {
         });
     };
     return <div>
+        <Navbar />
         <h2>Principal Dashboard</h2>
         <h3>List of Teachers</h3>
         <ul>
@@ -29,7 +29,6 @@ const PrincipalDashboard = () => {
                 ))
             )}
         </ul>
-        <button onClick={() => navigate('/')}>Go to Home</button>
     </div>
 }
 

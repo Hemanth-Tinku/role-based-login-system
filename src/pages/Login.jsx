@@ -22,7 +22,7 @@ function Login() {
                 state.principal.userName === username && state.principal.password === password
                     ? state.principal
                     : state.teachers.find(
-                        (teacher) => teacher.userName === username && teacher.password === password && teacher?.approved
+                        (teacher) => teacher.userName === username && teacher.password === password
                     ) ||
                     state.students.find(
                         (student) => student.userName === username && student.password === password
